@@ -1,0 +1,35 @@
+version: "3.1"
+
+services:
+
+  mysql:
+    image: mysql:8.0
+    container_name: sf4-mysql
+    working_dir: /application
+    volumes:
+      - ./symfony/:/application
+    environment:
+      - MYSQL_ROOT_PASSWORD=db_root_password
+      - MYSQL_DATABASE=db_database
+      - MYSQL_USER=db_user
+      - MYSQL_PASSWORD=db_password
+    ports:
+      - "8002:3306"
+
+  nginx:
+    image: nginx:alpine
+    container_name: sf4-nginx
+    working_dir: /application
+    volumes:
+        - ./symfony/:/application
+        - ./docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - "8000:80"
+
+  php-fpm:
+    build: docker/php-fpm
+    container_name: sf4-phpfpm
+    working_dir: /application
+    volumes:
+      - ./symfony/:/application
+      - ./docker/php-fpm/php-ini-overrides.ini:/etc/php/7.2/fpm/conf.d/99-overrides.ini
