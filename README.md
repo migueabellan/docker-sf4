@@ -1,37 +1,28 @@
-# Docker SF4
+# Docker Symfony 4
 
-> Simple example of Symfony 4 with Docker (docker-compose)
+> Docker-compose for Symfony (PHP72-FPM - NGINX - MySQL)
 
-
-
-### Installing
-
-Clone this repository
+Create a `.env`
 
 ```sh
-$ git clone https://github.com/migueabellan/docker-sf4.git
+$ cp .env.dist .env
 ```
 
-Install with composer
+Build and run container
 
 ```sh
-$ composer install
-$ php bin/console doctrine:database:drop --force
-$ php bin/console doctrine:database:create
-$ php bin/console doctrine:schema:update --force
-```
-
-Test
-
-```sh
-$ phpunit tests
-```
-
-Up and down docker
-
-```sh
+$ docker-compose build
 $ docker-compose up -d
-localhost:8000
+```
 
-$ docker-compose down
+Copy your symfony 4 in `web/` folder
+
+```sh
+$ web/
+```
+
+Access project
+
+```sh
+http://localhost:1180
 ```
