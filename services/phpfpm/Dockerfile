@@ -11,3 +11,6 @@ RUN curl https://phar.phpunit.de/phpunit.phar -L > phpunit.phar \
 
 # Clean cache
 RUN apt-get clean; rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
+
+ARG UID=1000
+RUN useradd -u $UID myuser
